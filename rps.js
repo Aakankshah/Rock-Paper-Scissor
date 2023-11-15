@@ -109,3 +109,35 @@ function pickCompMove()
 
     return move;
 }
+
+let isAutoPlaying = false;
+let intervalId;
+function autoplay()
+{
+    if(!isAutoPlaying)
+    {
+        intervalId = setInterval(function(){ 
+            let playermove = pickCompMove();
+            playgame(playermove);},1000);
+            isAutoPlaying=true;
+    }
+    else
+    {
+        clearInterval(intervalId);
+        isAutoPlaying=false;
+    }
+
+    setbuttonvalue();
+}
+
+function setbuttonvalue()
+{
+    if(document.querySelector('.autoplay').innerText === 'Auto Play')
+    {
+        document.querySelector('.autoplay').innerText = 'Stop Auto Play'
+    }
+    else
+    {
+        document.querySelector('.autoplay').innerText = 'Auto Play'
+    }
+}
